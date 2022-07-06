@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            height: 100vh;
+            width: 100%;
+            display: grid;
+            place-items: center;
+            counter-reset: score;
+        }
+        .phone{
+            position: relative;
+            border: 8px solid black;
+            border-radius: 40px;
+            height: 600px;
+            width: 300px;
+            background: #ccefff;
+            box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+        }
+
+        .left-ear--outer{
+            background-color: white;
+            border-radius: 90%;
+            width: 20px;
+            height: 50px;
+            position: absolute;
+            left: 10px;
+        }
+        .left-ear--inner{
+            background-color: pink;
+            border-radius: 90%;
+            width: 10px;
+            height: 50px;
+            position: absolute;
+            left: 15px;
+            top: 8px;
+        }
+        .right-ear--outer{
+            background-color: white;
+            border-radius: 90%;
+            width: 20px;
+            height: 50px;
+            position: absolute;
+            right: 10px;
+        }
+        .right-ear--inner{
+            background-color: pink;
+            border-radius: 90%;
+            width: 10px;
+            height: 50px;
+            position: absolute;
+            right: 15px;
+            top: 8px;
+        }
+        .head{
+            background-color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: absolute;
+            top: 30px;
+        }
+        .head__eye{
+            background-color: red;
+            border-radius: 50%;
+            width: 4px;
+            height: 4px;
+            position: absolute;
+            top: 15px;
+            animation-name: blink;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes blink{
+            0%{
+                height: 4px;
+            }
+            5%{
+                transform: translate(0px, 2px);
+                height: 1px;
+            }
+            10%{
+                transform: translate(0px, 0px);
+                height: 4px;
+            }
+        }
+
+        .head__eye--left{
+            left: 25px;
+        }
+        .head__eye--right{
+            right: 25px;
+        }
+        .mountain{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            background-color: #b16451;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+        .ground{
+            background: 
+            linear-gradient(135deg, #6daa68 8%, transparent 8%) 20px 0px, 
+            linear-gradient(-135deg, #6daa68 8%, transparent 8%) 20px 0px,
+            linear-gradient(135deg, #9f4d3e 12%, transparent 9%) 20px 0px, 
+            linear-gradient(-135deg, #9f4d3e 12%, transparent 9%) 20px 0px;
+        }
+        .mountain-3{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            background-color: #b16451;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+        .mountain-3 .ground{
+            background: 
+            linear-gradient(135deg, #6daa68 12%, transparent 8%) 20px 0px, 
+            linear-gradient(-135deg, #6daa68 12%, transparent 8%) 20px 0px,
+            linear-gradient(135deg, #9f4d3e 18%, transparent 9%) 20px 0px, 
+            linear-gradient(-135deg, #9f4d3e 18%, transparent 9%) 20px 0px;
+        }
+        .top-left{
+            border-top-left-radius: 20px;
+        }
+        .top-right{
+            border-top-right-radius: 20px;
+        }
+
+        .hojas{
+            background-color: #6daa68;
+            border-radius: 50%;
+        }
+        .hoja-1{
+            position: absolute;
+            top: -20px;
+            left: 65px;
+            width: 70px;
+            height: 70px;
+        }
+        .hoja-2{
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+        }
+        .hoja-3{
+            position: absolute;
+            top: -10px;
+            left: 125px;
+            width: 65px;
+            height: 65px;
+        }
+
+        .cloud{
+            overflow: hidden;
+            border-radius: 40px;
+        }
+        .clouds{
+            position: relative;
+            background-color: white;
+            border-radius: 50%;
+        }
+        .clouds-1{
+            top: 42px;
+            left: -30px;
+            width: 60px;
+            height: 60px;
+        }
+        .clouds-2{
+            top: -41px;
+            left: 0px;
+            width: 70px;
+            height: 70px;
+        }
+        .clouds-3{
+            top: -88px;
+            left: 10px;
+            width: 100px;
+            height: 100px;
+        }
+        .clouds-4{
+            top: 42px;
+            right: -101px;
+            width: 60px;
+            height: 60px;
+        }
+        .clouds-5{
+            top: -41px;
+            right: -6px;
+            width: 70px;
+            height: 70px;
+        }
+        .clouds-6{
+            top: -113px;
+            right: -32px;
+            width: 100px;
+            height: 100px;
+        }
+
+        input[type=checkbox]{
+            position: relative;
+            /* appearance: none; */
+            cursor: pointer;
+            width: 100%;
+            height: 60px;
+            z-index: 2;
+        }
+
+        /* input[type=checkbox]:focus {
+            appearance: none;
+            outline: none;
+        } */
+
+        input:checked {
+            counter-increment: score;
+        }
+
+        .score::after {
+            content: counter(score);
+        }
+
+        @keyframes bunny {
+            0%{
+                top: 0px;
+            }
+            50%{
+                top: 80px;
+            }
+            100%{
+                top: 0px;
+            }
+        }
+
+        @keyframes hide {
+            0%{
+                bottom: 0px;
+            }
+            50%{
+                bottom: -80px;
+            }
+            100%{
+                bottom: 0px;
+            }
+        }
+
+        .layer-1{
+            position: absolute;
+            z-index: 1;
+            height: 450px;
+            width: 80px;
+            bottom: 0;
+            right: 60px;
+            animation-name: hide;
+            animation-duration: 2.5s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        .layer-1 input[type=checkbox]{
+            animation-name: bunny;
+            animation-duration: 2.5s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .layer-2{
+            position: absolute;
+            z-index: 2;
+            height: 450px;
+            width: 80px;
+            bottom: 0;
+            left: 60px;
+            animation-name: hide;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        .layer-2 input[type=checkbox]{
+            animation-name: bunny;
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+        .layer-3{
+            position: absolute;
+            z-index: 3;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 220px;
+            height: 400px;
+            /* background-color: wheat; */
+            bottom: 0;
+        }
+        .layer-4{
+            position: absolute;
+            z-index: 4;
+            height: 330px;
+            width: 80px;
+            bottom: 0;
+            left: 20px;
+            animation-name: hide;
+            animation-duration: 3s;
+            animation-timing-function: cubic-bezier(ease-in-out);
+            animation-iteration-count: infinite;
+        }
+        .layer-4 input[type=checkbox]{
+            animation-name: bunny;
+            animation-duration: 3s;
+            animation-timing-function: cubic-bezier(ease-in-out);
+            animation-iteration-count: infinite;
+        }
+        .layer-5{
+            position: absolute;
+            z-index: 5;
+            left: 0;
+            margin: 0 auto;
+            width: 190px;
+            height: 280px;
+            /* background-color: rgb(204, 245, 179); */
+            bottom: 0;
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.3);
+        }
+        .layer-6{
+            position: absolute;
+            z-index: 6;
+            height: 230px;
+            width: 80px;
+            bottom: 0;
+            right: 20px;
+            animation-name: hide;
+            animation-duration: 1.9s;
+            animation-timing-function: cubic-bezier(ease-in-out);
+            animation-iteration-count: infinite;
+        }
+        .layer-6 input[type=checkbox]{
+            animation-name: bunny;
+            animation-duration: 1.9s;
+            animation-timing-function: cubic-bezier(ease-in-out);
+            animation-iteration-count: infinite;
+        }
+        .layer-7{
+            position: absolute;
+            z-index: 7;
+            right: 0;
+            margin: 0 auto;
+            width: 190px;
+            height: 180px;
+            /* background-color: rgb(221, 179, 245); */
+            bottom: 0;
+            box-shadow: -10px 10px 5px rgba(0, 0, 0, 0.3);
+
+        }
+        .layer-8{
+            position: absolute;
+            z-index: 8;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 220px;
+            height: 60px;
+            bottom: 0;
+            background-color: #6daa68;
+        }
+        .layer-9{
+            position: absolute;
+            z-index: 9;
+            right: 0;
+            margin: 0 auto;
+            width: 150px;
+            height: 100px;
+            bottom: 0;
+        }
+        .layer-10{
+            position: absolute;
+            z-index: 10;
+            left: 0;
+            margin: 0 auto;
+            width: 150px;
+            height: 100px;
+            bottom: 0;
+        }
+
+        .title{
+            font-size: 15px;
+            margin: 10px auto;
+            text-align: center;
+        }
+        .score{
+            font-size: 13px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <h1 class="title">Welcome to Rabbiesos</h1>
+        <h3 class="score">Score: </h3>
+        <div class="layer-1">
+            <input type="checkbox">
+            <div class="left-ear--outer"></div>
+            <div class="left-ear--inner"></div>
+            <div class="right-ear--outer"></div>
+            <div class="right-ear--inner"></div>
+            <div class="head">
+                <div class="head__eye head__eye--left"></div>
+                <div class="head__eye head__eye--right"></div>
+            </div>
+        </div>
+        <div class="layer-2">
+            <input type="checkbox">
+            <div class="left-ear--outer"></div>
+            <div class="left-ear--inner"></div>
+            <div class="right-ear--outer"></div>
+            <div class="right-ear--inner"></div>
+            <div class="head">
+                <div class="head__eye head__eye--left"></div>
+                <div class="head__eye head__eye--right"></div>
+            </div>
+        </div>
+        <div class="layer-3 mountain">
+            <div class="ground top-left"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground top-right"></div>
+        </div>
+        <div class="layer-4">
+            <input type="checkbox">
+            <div class="left-ear--outer"></div>
+            <div class="left-ear--inner"></div>
+            <div class="right-ear--outer"></div>
+            <div class="right-ear--inner"></div>
+            <div class="head">
+                <div class="head__eye head__eye--left"></div>
+                <div class="head__eye head__eye--right"></div>
+            </div>
+        </div>
+        <div class="layer-5 mountain">
+            <div class="ground top-left"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground top-right"></div>
+        </div>
+        <div class="layer-6">
+            <input type="checkbox">
+            <div class="left-ear--outer"></div>
+            <div class="left-ear--inner"></div>
+            <div class="right-ear--outer"></div>
+            <div class="right-ear--inner"></div>
+            <div class="head">
+                <div class="head__eye head__eye--left"></div>
+                <div class="head__eye head__eye--right"></div>
+            </div>
+        </div>
+        <div class="layer-7 mountain-3">
+            <div class="ground top-left"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground"></div>
+            <div class="ground top-right"></div>
+        </div>
+        <div class="layer-8 arbusto">
+            <div class="hojas hoja-1"></div>
+            <div class="hojas hoja-2"></div>
+            <div class="hojas hoja-3"></div>
+            <div class="hojas hoja-4"></div>
+        </div>
+        <div class="layer-9 cloud">
+            <div class="clouds clouds-4"></div>
+            <div class="clouds clouds-5"></div>
+            <div class="clouds clouds-6"></div>
+        </div>
+        <div class="layer-10 cloud">
+            <div class="clouds clouds-1"></div>
+            <div class="clouds clouds-2"></div>
+            <div class="clouds clouds-3"></div>
+        </div>
+    </div>
+</body>
+</html>
